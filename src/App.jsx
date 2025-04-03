@@ -20,6 +20,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 function App() {
   const [movie, setMovie] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [validate, setValidate] = useState(false);
   const comments = useSelector(selectComment);
 
   useEffect(() => {
@@ -107,13 +108,23 @@ function App() {
           )}
 
           <h2>Commentaires</h2>
-          <Form onSubmit={handleSubmit(onSubmit)} className="mb-4">
+          <Form
+            noValidate
+            validated={validate}
+            onSubmit={handleSubmit(onSubmit)}
+            className="mb-4"
+          >
             <Form.Group className="mb-3" controlId="formText">
               <Form.Label>Ajouter un commentaire</Form.Label>
-              <Form.Control as="textarea" rows={3} {...register("comment")} />
-              {errors.comment && (
-                <p className="text-danger">{errors.comment.message}</p>
-              )}
+              <Form.Control
+                as="textarea"
+                rows={3}
+                {...register("comment")}
+                isInvalid={!!errors.comment}
+              />
+              <Form.Control.Feedback type="invalid">
+                {errors.comment?.message}
+              </Form.Control.Feedback>
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formNote">
@@ -122,10 +133,11 @@ function App() {
                 type="number"
                 placeholder="Sélectionnez une note"
                 {...register("note")}
+                isInvalid={!!errors.note}
               />
-              {errors.note && (
-                <p className="text-danger">{errors.note.message}</p>
-              )}
+              <Form.Control.Feedback type="invalid">
+                {errors.note?.message}
+              </Form.Control.Feedback>
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formTerms">
@@ -133,10 +145,10 @@ function App() {
                 type="checkbox"
                 label="J'accepte les conditions générales"
                 {...register("acceptConditions")}
+                feedback={errors.acceptConditions?.message}
+                feedbackType="invalid"
+                isInvalid={!!errors.acceptConditions}
               />
-              {errors.acceptConditions && (
-                <p className="text-danger">{errors.acceptConditions.message}</p>
-              )}
             </Form.Group>
 
             <Button type="submit">Ajouter</Button>
