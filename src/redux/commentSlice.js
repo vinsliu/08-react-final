@@ -7,16 +7,15 @@ const commentSlice = createSlice({
     addComment: (state, action) => {
       state.comments.push({
         id: Date.now(),
-        text: action.payload.text,
+        comment: action.payload.comment,
         note: action.payload.note,
-        termsAccepted: false,
+        acceptConditions: false,
       });
     },
     deleteComment: (state, action) => {
-      const comment = state.comments.find(
-        (comment) => comment.id === action.payload
+      state.comments = state.comments.filter(
+        (comment) => comment.id !== action.payload
       );
-      if (comment) comment.termsAccepted = !comment.termsAccepted;
     },
   },
 });
