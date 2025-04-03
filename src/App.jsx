@@ -73,6 +73,7 @@ function App() {
   const onSubmit = (data) => {
     dispatch(addComment({ comment: data.comment, note: data.note }));
     console.log(data);
+    setValidate(true);
     reset();
   };
 
