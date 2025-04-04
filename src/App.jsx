@@ -11,7 +11,6 @@ import {
   Spinner,
 } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { selectComment } from "./redux/selectors";
 import { addComment, deleteComment } from "./redux/commentSlice";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -21,7 +20,7 @@ function App() {
   const [movie, setMovie] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const comments = useSelector(selectComment);
+  const comments = useSelector((state) => state.comments.comments);
 
   useEffect(() => {
     async function fetchMovie() {
