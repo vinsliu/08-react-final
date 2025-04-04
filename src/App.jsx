@@ -34,7 +34,7 @@ function App() {
         console.log(e.message);
         setError(e.message);
       } finally {
-        setTimeout(() => setLoading(false), 1000);
+        setTimeout(() => setLoading(false), 500);
       }
     }
     fetchMovie();
@@ -62,11 +62,6 @@ function App() {
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
-    defaultValues: {
-      comment: "",
-      note: null,
-      acceptConditions: false,
-    },
   });
 
   const dispatch = useDispatch();
