@@ -33,7 +33,7 @@ function App() {
         console.log(e.message);
         setError(e.message);
       } finally {
-        setTimeout(() => setLoading(false), 500);
+        setLoading(false);
       }
     }
     fetchMovie();
@@ -51,7 +51,6 @@ function App() {
       .max(5, "Note maximale : 5"),
     acceptConditions: yup
       .boolean()
-      .required("Vous devez accepter les conditions générales.")
       .oneOf([true], "Vous devez accepter les conditions générales."),
   });
 
@@ -62,11 +61,13 @@ function App() {
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
+    defaultValues: { acceptConditions: false },
   });
 
   const dispatch = useDispatch();
 
   const onSubmit = (data) => {
+    console.log(data);
     dispatch(
       addComment({
         comment: data.comment,
@@ -74,7 +75,6 @@ function App() {
         acceptConditions: data.acceptConditions,
       })
     );
-    console.log(data);
     reset();
   };
 
