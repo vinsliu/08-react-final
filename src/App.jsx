@@ -74,7 +74,11 @@ function App() {
       })
     );
     console.log(data);
-    reset();
+    reset({
+      comment: null,
+      note: null,
+      acceptConditions: false,
+    });
   };
 
   if (error)
