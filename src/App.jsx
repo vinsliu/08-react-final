@@ -20,7 +20,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 function App() {
   const [movie, setMovie] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [validate, setValidate] = useState(false);
   const comments = useSelector(selectComment);
 
   useEffect(() => {
@@ -73,7 +72,6 @@ function App() {
   const onSubmit = (data) => {
     dispatch(addComment({ comment: data.comment, note: data.note }));
     console.log(data);
-    setValidate(true);
     reset();
   };
 
@@ -110,7 +108,6 @@ function App() {
 
           <h2>Commentaires</h2>
           <Form
-            validated={validate}
             onSubmit={handleSubmit(onSubmit)}
             className="mb-4"
           >
