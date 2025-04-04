@@ -134,11 +134,11 @@ function App() {
               <Form.Label>Note</Form.Label>
               <Form.Select {...register("note")} isInvalid={!!errors.note}>
                 <option value="0">Sélectionnez une note</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
+                {[1, 2, 3, 4, 5].map((i) => (
+                  <option value={i} key={i}>
+                    {i}
+                  </option>
+                ))}
               </Form.Select>
               <Form.Control.Feedback type="invalid">
                 {errors.note?.message}
