@@ -110,7 +110,6 @@ function App() {
 
           <h2>Commentaires</h2>
           <Form
-            noValidate
             validated={validate}
             onSubmit={handleSubmit(onSubmit)}
             className="mb-4"
@@ -130,12 +129,14 @@ function App() {
 
             <Form.Group className="mb-3" controlId="formNote">
               <Form.Label>Note</Form.Label>
-              <Form.Control
-                type="number"
-                placeholder="Sélectionnez une note"
-                {...register("note")}
-                isInvalid={!!errors.note}
-              />
+              <Form.Select {...register("note")} isInvalid={!!errors.note}>
+                <option value="0">Sélectionnez une note</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </Form.Select>
               <Form.Control.Feedback type="invalid">
                 {errors.note?.message}
               </Form.Control.Feedback>
