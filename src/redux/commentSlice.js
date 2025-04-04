@@ -9,7 +9,7 @@ const commentSlice = createSlice({
         id: Date.now(),
         comment: action.payload.comment,
         note: action.payload.note,
-        acceptConditions: false,
+        acceptConditions: action.payload.acceptConditions,
       });
     },
     deleteComment: (state, action) => {

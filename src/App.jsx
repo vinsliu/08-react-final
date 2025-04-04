@@ -67,7 +67,13 @@ function App() {
   const dispatch = useDispatch();
 
   const onSubmit = (data) => {
-    dispatch(addComment({ comment: data.comment, note: data.note }));
+    dispatch(
+      addComment({
+        comment: data.comment,
+        note: data.note,
+        acceptConditions: data.acceptConditions,
+      })
+    );
     console.log(data);
     reset();
   };
