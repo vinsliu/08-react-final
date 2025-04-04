@@ -51,6 +51,7 @@ function App() {
       .max(5, "Note maximale : 5"),
     acceptConditions: yup
       .boolean()
+      .required("Vous devez accepter les conditions générales.")
       .oneOf([true], "Vous devez accepter les conditions générales."),
   });
 
@@ -74,11 +75,7 @@ function App() {
       })
     );
     console.log(data);
-    reset({
-      comment: null,
-      note: null,
-      acceptConditions: false,
-    });
+    reset();
   };
 
   if (error)
