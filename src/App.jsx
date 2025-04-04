@@ -20,6 +20,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 function App() {
   const [movie, setMovie] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const comments = useSelector(selectComment);
 
   useEffect(() => {
@@ -31,6 +32,7 @@ function App() {
         setMovie(data[0]);
       } catch (e) {
         console.log(e.message);
+        setError(e.message);
       } finally {
         setTimeout(() => setLoading(false), 1000);
       }
@@ -75,6 +77,13 @@ function App() {
     reset();
   };
 
+  if (error)
+    return (
+      <div className="d-flex justify-content-center align-items-center vh-100">
+        <p className="text-danger">Erreur : {error}</p>
+      </div>
+    );
+
   if (loading)
     return (
       <div className="d-flex justify-content-center align-items-center vh-100">
@@ -107,10 +116,7 @@ function App() {
           )}
 
           <h2>Commentaires</h2>
-          <Form
-            onSubmit={handleSubmit(onSubmit)}
-            className="mb-4"
-          >
+          <Form onSubmit={handleSubmit(onSubmit)} className="mb-4">
             <Form.Group className="mb-3" controlId="formText">
               <Form.Label>Ajouter un commentaire</Form.Label>
               <Form.Control
