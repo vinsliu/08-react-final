@@ -80,7 +80,10 @@ function App() {
   if (error)
     return (
       <div className="d-flex justify-content-center align-items-center vh-100">
-        <p className="text-danger">Erreur : {error}</p>
+        <p className="text-danger text-center">
+          Une erreur est survenue lors du chargement du film. <br />
+          Veuillez réessayer dans quelques instants.
+        </p>
       </div>
     );
 
